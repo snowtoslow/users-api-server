@@ -1,6 +1,7 @@
 package midleware
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
@@ -26,17 +27,23 @@ func (m *AuthMiddleware) Handle(c *gin.Context) {
 
 	headerParts := strings.Split(authHeader, " ")
 	if len(headerParts) != 2 {
-		c.AbortWithStatus(http.StatusUnauthorized)
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+			"message": "Authorization header should contain 2 parts: Bearer + token",
+		})
 		return
 	}
 
 	if headerParts[0] != "Bearer" {
-		c.AbortWithStatus(http.StatusUnauthorized)
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+			"message": "You've miss the Bearer prefix",
+		})
 		return
 	}
 
 	if _, err := m.authSrv.ValidateToken(headerParts[1]); err != nil {
-		c.AbortWithStatus(http.StatusUnauthorized)
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+			"message": fmt.Sprintf("Was provided an invalid token, caused by: %s", err),
+		})
 		return
 	}
 }
