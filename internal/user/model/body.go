@@ -2,11 +2,13 @@ package model
 
 type UserReq struct {
 	ID        string  `json:"id"`
-	FirstName string  `json:"firstname"`
-	LastName  string  `json:"lastname"`
-	Age       uint8   `json:"age"`
-	RandomKey string  `json:"random_key"`
+	FirstName string  `json:"firstname" binding:"required"`
+	LastName  string  `json:"lastname" binding:"required"`
+	Age       uint8   `json:"age" binding:"required"`
+	Email     string  `json:"email" binding:"email"`
+	RandomKey string  `json:"random_key" binding:"required"`
 	LatLong   LatLong `json:"maps"`
+	Password  string  `json:"password" binding:"required"`
 }
 
 type UserResponse struct {

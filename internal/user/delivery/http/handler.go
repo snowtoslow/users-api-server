@@ -24,6 +24,7 @@ func (handler Handler) CreateUser(ctx *gin.Context) {
 	if err := ctx.Bind(&userReqModel); err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest,
 			gin.H{"status": "failed", "message": fmt.Sprintf("Failed to parse request body: %s", err.Error())})
+		return
 	}
 
 	createdUserID, err := handler.service.CreateUser(ctx.Request.Context(), userReqModel)

@@ -7,11 +7,13 @@ import (
 
 type User struct {
 	ID        string   `json:"id" gorm:"primary_key"`
-	FirstName string   `json:"firstname" gorm:" column:firstname"`
-	LastName  string   `json:"lastname" gorm:" column:lastname"`
-	Age       uint8    `json:"age"`
+	FirstName string   `json:"firstname" gorm:"column:firstname" validate:"required"`
+	LastName  string   `json:"lastname" gorm:"column:lastname" validate:"required"`
+	Email     string   `json:"email" validate:"email"`
+	Age       uint8    `json:"age" validate:"required"`
 	Position  Position `json:"position"`
-	Password  string   `json:"-"`
+	Password  string   `json:"-" gorm:"column:password" validate:"required"`
+	RandomKey string   `json:"randomKey"`
 }
 
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
@@ -32,8 +34,11 @@ func UserFromReq(req UserReq) User {
 		ID:        req.ID,
 		FirstName: req.FirstName,
 		LastName:  req.LastName,
+		Email:     req.Email,
 		Age:       req.Age,
 		Position:  MapToPosition(req.LatLong),
+		Password:  req.Password,
+		RandomKey: req.RandomKey,
 	}
 }
 

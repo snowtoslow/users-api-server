@@ -38,6 +38,7 @@ func (sl SqlLite) UpdateUserByID(ctx context.Context, id string, user model.User
 	foundUser.FirstName = user.FirstName
 	foundUser.LastName = user.LastName
 	foundUser.Age = user.Age
+	foundUser.Email = user.Email
 	foundUser.Position = user.Position
 
 	if err := sl.db.WithContext(ctx).
