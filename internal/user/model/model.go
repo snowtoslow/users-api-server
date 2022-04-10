@@ -11,6 +11,7 @@ type User struct {
 	LastName  string   `json:"lastname" gorm:" column:lastname"`
 	Age       uint8    `json:"age"`
 	Position  Position `json:"position"`
+	Password  string   `json:"-"`
 }
 
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {

@@ -1,12 +1,26 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"users-api-server/cmd"
+	"users-api-server/config"
 )
 
+var cfgPath string
+
+func init() {
+	flag.StringVar(&cfgPath, "config", "./config/default.config.json", "config file (default is $HOME/./config/default.config.json)")
+	flag.Parse()
+}
+
 func main() {
-	if err := cmd.Run(8080);err != nil {
+	cfg, err := config.ParseConfigFile(cfgPath)
+	if err != nil {
+		log.Fatal("Failed to parse config file by specified path:", err)
+	}
+
+	if err = cmd.Run(cfg); err != nil {
 		log.Fatal("Failed to run users-api")
 	}
 }
