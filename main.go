@@ -23,4 +23,6 @@ func main() {
 	if err = cmd.Run(cfg); err != nil {
 		log.Fatal("Failed to run users-api")
 	}
+
+	log.Printf("The users-api-server is up and running on port: %s with sqllite database name: %s", cfg.AppPort, cfg.DatabaseName)
 }

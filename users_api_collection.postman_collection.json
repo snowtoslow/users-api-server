@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "14c14371-0a89-44b6-898e-c420bcee7ba8",
+		"name": "users_api_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"firstname\":\"Vova\",\n    \"lastname\": \"Leadavschi\",    \n    \"age\":22,\n    \"random_key\":\"randomKey\",\n    \"maps\":{\n        \"latitude\": 10, \n        \"longitude\": 11 \n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserByID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/89f541c9-4dfc-4cc5-8249-c8338190fd3c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"89f541c9-4dfc-4cc5-8249-c8338190fd3c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUserByID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"firstname\":\"Vladimir\",\n    \"lastname\": \"Temeliescu\",    \n    \"age\":22,\n    \"random_key\":\"randomKey\",\n    \"maps\":{\n        \"latitude\": 13, \n        \"longitude\": 13 \n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/20e811fb-b647-40b6-bd69-b3268165820b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"20e811fb-b647-40b6-bd69-b3268165820b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateSomeFields",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"lastname\": \"Botnari27\",    \n    \"age\":27\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/20e811fb-b647-40b6-bd69-b3268165820b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"20e811fb-b647-40b6-bd69-b3268165820b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/?size=10&page=0&filter=firstname=Vladimir&sort=lastname asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "filter",
+							"value": "firstname=Vladimir"
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "lastname asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authorize",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"admin\",\n    \"password\":\"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v0/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v0",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
