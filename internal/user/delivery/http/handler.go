@@ -22,7 +22,7 @@ func NewHandler(service user.IUserService) *Handler {
 func (handler Handler) CreateUser(ctx *gin.Context) {
 	var userReqModel model.UserReq
 	if err := ctx.Bind(&userReqModel); err != nil {
-		ctx.AbortWithStatusJSON(http.StatusInternalServerError,
+		ctx.AbortWithStatusJSON(http.StatusBadRequest,
 			gin.H{"status": "failed", "message": fmt.Sprintf("Failed to parse request body: %s", err.Error())})
 	}
 
@@ -77,7 +77,7 @@ func (handler Handler) GetUserByID(ctx *gin.Context) {
 func (handler Handler) SetPartially(ctx *gin.Context) {
 	partiallyFieldsToBeSet := make(map[string]interface{})
 	if err := ctx.Bind(&partiallyFieldsToBeSet); err != nil {
-		ctx.AbortWithStatusJSON(http.StatusInternalServerError,
+		ctx.AbortWithStatusJSON(http.StatusBadRequest,
 			gin.H{"status": "failed", "message": fmt.Sprintf("Failed to parse request body: %s", err.Error())})
 		return
 	}
